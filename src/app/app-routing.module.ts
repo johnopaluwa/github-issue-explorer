@@ -5,8 +5,8 @@ import { ModuleUrls } from './root/enums/global-url.enum';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: `${ModuleUrls.explore}`,
+    pathMatch: 'prefix',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: `${ModuleUrls.explore}`,
