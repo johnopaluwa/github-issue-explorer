@@ -96,7 +96,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.associations": {
-    "*.graphql": "typescript"
+    "*.graphql": "graphql"
   },
   "[graphql]": {
     "editor.gotoLocation.multipleDefinitions": "peek"
