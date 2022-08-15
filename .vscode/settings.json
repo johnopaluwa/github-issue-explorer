@@ -1,0 +1,104 @@
+{
+  "git.autofetch": true,
+  "extensions.ignoreRecommendations": false,
+  "git.enableSmartCommit": true,
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true,
+    "suppressShowKeyBindingsNotice": true
+  },
+  "editor.minimap.enabled": false,
+  "gitlens.views.lineHistory.enabled": true,
+  "breadcrumbs.enabled": true,
+  "typescriptHero.imports.stringQuoteStyle": "'",
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "javascript.referencesCodeLens.enabled": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "gitlens.codeLens.includeSingleLineSymbols": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/backend/*/bin/**": true,
+    "**/backend/*/obj/**": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/backend/*/bin/**": true,
+    "**/backend/*/obj/**": true
+  },
+  "vsicons.projectDetection.disableDetect": true,
+  "workbench.startupEditor": "welcomePage",
+  "[html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "csscomb.formatOnSave": true,
+  "stylelint.validate": ["scss"],
+  "stylelint.packageManager": "npm",
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "terminal.integrated.rendererType": "dom",
+  "terraform.languageServer": {
+    "external": true
+  },
+  "workbench.editor.scrollToSwitchTabs": true,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "workbench.iconTheme": "vscode-icons",
+  "eslint.workingDirectories": ["./src/frontend"],
+  "eslint.options": {
+    "extensions": [".ts", ".html"]
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+  "cssPeek.peekToExclude": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/frontend/dist/**",
+    "**/frontend/android/**",
+    "**/frontend/ios/**",
+    "**/frontend/deploy/**"
+  ],
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.associations": {
+    "*.graphql": "typescript"
+  },
+  "[graphql]": {
+    "editor.gotoLocation.multipleDefinitions": "peek"
+  }
+}

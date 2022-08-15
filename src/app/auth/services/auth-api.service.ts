@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { PublicRepoGQL } from 'src/generated/graphql';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthApiService {
-  constructor(private apollo: Apollo) {}
+  constructor(private publicRepoGQL: PublicRepoGQL) {}
 
-  authenticate(token: string) {}
+  authenticate() {
+    this.publicRepoGQL
+      .watch()
+      .valueChanges.subscribe((s) => console.warn(s.data.search.edges));
+  }
 }
