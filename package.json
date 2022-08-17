@@ -25,6 +25,7 @@
     "@ngrx/effects": "^13.2.0",
     "@ngrx/entity": "^13.2.0",
     "@ngrx/store": "^13.2.0",
+    "@ngrx/store-devtools": "^13.2.0",
     "apollo-angular": "^3.0.1",
     "graphql": "^16",
     "rxjs": "~7.4.0",
