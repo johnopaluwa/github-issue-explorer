@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { map } from 'rxjs';
+import { AuthenticateUserGQL } from 'src/generated/graphql';
 
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
-  constructor() {}
+  constructor(private authenticateUserGQL: AuthenticateUserGQL) {}
 
   authenticate() {
-    return of(null);
+    return this.authenticateUserGQL
+      .watch()
+      .valueChanges.pipe(map((s) => s.data));
   }
 }

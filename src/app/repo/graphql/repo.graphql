@@ -1,4 +1,4 @@
-query PublicRepo {
+query GetPublicRepo {
   search(query: "is:public", type: REPOSITORY, first: 50) {
     repositoryCount
     pageInfo {

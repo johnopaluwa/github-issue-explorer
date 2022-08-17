@@ -9,7 +9,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { TokenEffects } from './ngrx/effects/token.effects';
-import { AUTH_REDUCERS } from './ngrx/reducers/index';
+import { authStateKey, AUTH_REDUCERS } from './ngrx/reducers/index';
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent],
@@ -19,7 +19,7 @@ import { AUTH_REDUCERS } from './ngrx/reducers/index';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    StoreModule.forFeature('auth', AUTH_REDUCERS),
+    StoreModule.forFeature(authStateKey, AUTH_REDUCERS),
     EffectsModule.forFeature([TokenEffects]),
     AuthRoutingModule,
   ],

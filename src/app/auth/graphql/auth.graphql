@@ -1,0 +1,5 @@
+query authenticateUser {
+  viewer {
+    id
+  }
+}

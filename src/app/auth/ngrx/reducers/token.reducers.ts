@@ -1,18 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
-import { tokenAuthenticated } from '../actions/token.actions';
+import { tokenAuthenticated, tokenSaved } from '../actions/token.actions';
 
 export interface TokenState {
   githubAPIToken: string;
+  isAuthenticated: boolean;
 }
 
 export const initialState: TokenState = {
   githubAPIToken: '',
+  isAuthenticated: false,
 };
 
 export const tokenReducer = createReducer(
   initialState,
-  on(tokenAuthenticated, (state, { token }) => ({
+  on(tokenSaved, (state, { token }) => ({
     ...state,
     githubAPIToken: token,
+  })),
+  on(tokenAuthenticated, (state, { isAuthenticated }) => ({
+    ...state,
+    isAuthenticated: isAuthenticated,
   }))
 );

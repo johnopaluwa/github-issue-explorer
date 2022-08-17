@@ -26403,13 +26403,36 @@ export type WorkflowRunPendingDeploymentRequestsArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
-export type PublicRepoQueryVariables = Exact<{ [key: string]: never; }>;
+export type AuthenticateUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PublicRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', repositoryCount: number, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', name: string, stargazerCount: number, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } } | { __typename?: 'User' } | null } | null> | null } };
+export type AuthenticateUserQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string } };
 
-export const PublicRepoDocument = gql`
-    query PublicRepo {
+export type GetPublicRepoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPublicRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', repositoryCount: number, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null }, edges?: Array<{ __typename?: 'SearchResultItemEdge', node?: { __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', name: string, stargazerCount: number, owner: { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } } | { __typename?: 'User' } | null } | null> | null } };
+
+export const AuthenticateUserDocument = gql`
+    query authenticateUser {
+  viewer {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AuthenticateUserGQL extends Apollo.Query<AuthenticateUserQuery, AuthenticateUserQueryVariables> {
+    document = AuthenticateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetPublicRepoDocument = gql`
+    query GetPublicRepo {
   search(query: "is:public", type: REPOSITORY, first: 50) {
     repositoryCount
     pageInfo {
@@ -26434,8 +26457,8 @@ export const PublicRepoDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class PublicRepoGQL extends Apollo.Query<PublicRepoQuery, PublicRepoQueryVariables> {
-    document = PublicRepoDocument;
+  export class GetPublicRepoGQL extends Apollo.Query<GetPublicRepoQuery, GetPublicRepoQueryVariables> {
+    document = GetPublicRepoDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
