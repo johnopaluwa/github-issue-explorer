@@ -2,13 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { overrides } from './environment.local';
 import { Environment, ENVIRONMENT_DEFAULTS } from './environment.model';
 
 export const environment: Environment = {
   ...ENVIRONMENT_DEFAULTS,
   production: false,
-  ...overrides,
 };
 
 /*

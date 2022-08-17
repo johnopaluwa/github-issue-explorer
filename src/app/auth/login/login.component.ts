@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .select(getGithubAPIToken)
       .pipe(
         filter((token) => !!token),
-        // distinctUntilChanged((prev, curr) => prev === curr),
         takeUntil(this.destroy$)
       )
       .subscribe((token) =>

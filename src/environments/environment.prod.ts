@@ -1,6 +1,6 @@
-import { Environment } from './environment.model';
+import { Environment, ENVIRONMENT_DEFAULTS } from './environment.model';
 
-export const ENVIRONMENT_DEFAULTS: Environment = {
+export const environment: Environment = {
+  ...ENVIRONMENT_DEFAULTS,
   production: true,
-  githubPersonlaAccess: '',
 };
