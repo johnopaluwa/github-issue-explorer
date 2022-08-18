@@ -13,7 +13,7 @@ export const tokenSaved = createAction(
 
 export const authenticateToken = createAction(
   '[Token] authenticate token',
-  props<{ token: string; reportProgress: ReportProgress }>()
+  props<{ token: string; reportProgress: ReportProgress<string> }>()
 );
 export const tokenAuthenticated = createAction(
   '[Token] token authenticated',

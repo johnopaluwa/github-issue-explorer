@@ -1,11 +1,13 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Progress } from './progress';
 
-export class ReportProgress {
+export class ReportProgress<T = undefined> {
   private readonly internalProgress$ = new BehaviorSubject<Progress>(
     Progress.None
   );
+
+  public readonly result$ = new ReplaySubject<T>(1);
 
   public readonly isInProgress$ = this.internalProgress$.pipe(
     map((s) => s === Progress.InProgress)
@@ -21,11 +23,17 @@ export class ReportProgress {
     this.internalProgress$.next(Progress.InProgress);
   }
 
-  done() {
+  done(withResult: T | null = null) {
     this.internalProgress$.next(Progress.Done);
+    if (withResult !== null) {
+      this.result$.next(withResult);
+    }
   }
 
-  failed() {
+  failed(withResult: T | null = null) {
     this.internalProgress$.next(Progress.Failed);
+    if (withResult !== null) {
+      this.result$.next(withResult);
+    }
   }
 }

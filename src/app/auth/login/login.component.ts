@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     authToken: ['', [Validators.required]],
   });
 
-  public readonly authenticateReportProgress = new ReportProgress();
+  public readonly authenticateReportProgress = new ReportProgress<string>();
 
   private destroy$ = new Subject<void>();
   constructor(private fb: FormBuilder, private store: Store) {}
@@ -43,6 +43,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   authenticate() {
+    if (this.loginFormGroup.invalid) {
+      return;
+    }
     this.store.dispatch(
       saveToken({
         token: this.loginFormGroup.value.authToken,

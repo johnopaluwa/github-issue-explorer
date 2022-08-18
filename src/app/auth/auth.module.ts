@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -19,6 +20,7 @@ import { authStateKey, AUTH_REDUCERS } from './ngrx/reducers/index';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressBarModule,
     StoreModule.forFeature(authStateKey, AUTH_REDUCERS),
     EffectsModule.forFeature([TokenEffects]),
     AuthRoutingModule,

@@ -2,11 +2,22 @@
   height: 100%;
   display: grid;
   align-items: center;
-  justify-content: center;
+  width: 60%;
+  margin: auto;
   text-align: center;
+  @media only screen and (max-width: 600px) {
+    width: 90%;
+  }
 }
 
 .login__input-form-field {
   width: 80%;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+}
+
+.login__error {
+  border: solid 1px red;
+  border-radius: 10px;
+  padding: 10px;
+  color: red;
 }
