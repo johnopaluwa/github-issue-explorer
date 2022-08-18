@@ -32,3 +32,8 @@ export const getGithubAPIToken = createSelector(
   getTokenState,
   (state) => state?.githubAPIToken
 );
+
+export const getIsUserAuthenticated = createSelector(
+  getTokenState,
+  (state) => state?.isAuthenticated
+);

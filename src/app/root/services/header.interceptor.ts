@@ -17,7 +17,6 @@ export class HeaderInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.warn(1);
     return this.store.select(getGithubAPIToken).pipe(
       first(),
       mergeMap((token) => {

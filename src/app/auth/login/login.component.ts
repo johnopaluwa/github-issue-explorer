@@ -46,9 +46,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginFormGroup.invalid) {
       return;
     }
+
+    const userToken: string = this.loginFormGroup.value.authToken;
     this.store.dispatch(
       saveToken({
-        token: this.loginFormGroup.value.authToken,
+        token: userToken?.trim(),
       })
     );
   }

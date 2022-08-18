@@ -1,3 +1,4 @@
-export enum ModuleUrls {
+export enum TopLevelUrls {
+  login = '',
   explore = 'explore',
 }

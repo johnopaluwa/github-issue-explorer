@@ -15,7 +15,10 @@ export const authenticateToken = createAction(
   '[Token] authenticate token',
   props<{ token: string; reportProgress: ReportProgress<string> }>()
 );
-export const tokenAuthenticated = createAction(
-  '[Token] token authenticated',
-  props<{ isAuthenticated: boolean }>()
+export const tokenAuthenticationSuccessful = createAction(
+  '[Token] token authentication successful'
+);
+
+export const tokenAuthenticationFailed = createAction(
+  '[Token] token authentication failed'
 );

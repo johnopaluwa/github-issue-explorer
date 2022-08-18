@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { tokenAuthenticated, tokenSaved } from '../actions/token.actions';
+import {
+  tokenAuthenticationFailed,
+  tokenAuthenticationSuccessful,
+  tokenSaved,
+} from '../actions/token.actions';
 
 export interface TokenState {
   githubAPIToken: string;
@@ -17,8 +21,12 @@ export const tokenReducer = createReducer(
     ...state,
     githubAPIToken: token,
   })),
-  on(tokenAuthenticated, (state, { isAuthenticated }) => ({
+  on(tokenAuthenticationSuccessful, (state) => ({
     ...state,
-    isAuthenticated: isAuthenticated,
+    isAuthenticated: true,
+  })),
+  on(tokenAuthenticationFailed, (state) => ({
+    ...state,
+    isAuthenticated: false,
   }))
 );
