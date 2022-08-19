@@ -1,0 +1,11 @@
+query GetPublicRepo {
+  search(query: "is:public", type: REPOSITORY, first: 50) {
+    nodes {
+      ... on Repository {
+        nameWithOwner
+        stargazerCount
+        description
+      }
+    }
+  }
+}

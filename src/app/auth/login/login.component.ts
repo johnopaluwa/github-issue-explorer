@@ -1,42 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter, Subject, takeUntil } from 'rxjs';
 import { ReportProgress } from 'src/app/root/helpers/report-progress';
-import { authenticateToken, saveToken } from '../ngrx/actions/token.actions';
-import { getGithubAPIToken } from '../ngrx/reducers';
+import { saveToken } from '../ngrx/actions/token.actions';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   public readonly loginFormGroup = this.fb.group({
     authToken: ['', [Validators.required]],
   });
 
   public readonly authenticateReportProgress = new ReportProgress<string>();
 
-  private destroy$ = new Subject<void>();
   constructor(private fb: FormBuilder, private store: Store) {}
 
-  ngOnInit(): void {
-    this.store
-      .select(getGithubAPIToken)
-      .pipe(
-        filter((token) => !!token),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((token) =>
-        this.store.dispatch(
-          authenticateToken({
-            token: token,
-            reportProgress: this.authenticateReportProgress,
-          })
-        )
-      );
-  }
+  ngOnInit(): void {}
 
   get controls() {
     return this.loginFormGroup.controls;
@@ -51,12 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       saveToken({
         token: userToken?.trim(),
+        reportProgress: this.authenticateReportProgress,
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

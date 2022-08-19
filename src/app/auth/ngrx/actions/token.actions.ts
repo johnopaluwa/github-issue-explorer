@@ -3,12 +3,12 @@ import { ReportProgress } from 'src/app/root/helpers/report-progress';
 
 export const saveToken = createAction(
   '[Token] save token',
-  props<{ token: string }>()
+  props<{ token: string; reportProgress: ReportProgress<string> }>()
 );
 
 export const tokenSaved = createAction(
   '[Token] token saved',
-  props<{ token: string }>()
+  props<{ token: string; reportProgress: ReportProgress<string> }>()
 );
 
 export const authenticateToken = createAction(

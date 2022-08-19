@@ -9,6 +9,6 @@ export class AuthApiService {
   authenticate() {
     return this.authenticateUserGQL
       .watch()
-      .valueChanges.pipe(map((s) => s.data));
+      .valueChanges.pipe(map((s) => s.data.viewer));
   }
 }
