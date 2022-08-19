@@ -1,9 +1,8 @@
 .login {
   height: 100%;
   display: grid;
-  align-items: center;
   width: 60%;
-  margin: auto;
+  margin: 30px auto auto auto;
   text-align: center;
   @media only screen and (max-width: 600px) {
     width: 90%;
@@ -11,7 +10,7 @@
 }
 
 .login__input-form-field {
-  width: 80%;
+  width: 100%;
   margin-bottom: 40px;
 }
 
@@ -20,4 +19,14 @@
   border-radius: 10px;
   padding: 10px;
   color: red;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  display: none;
+}
+
+.progress--visible {
+  display: block;
 }

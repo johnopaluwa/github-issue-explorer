@@ -1,6 +1,7 @@
 <mat-progress-bar
+  class="progress"
+  [class.progress--visible]="authenticateReportProgress.isInProgress$ | async"
   mode="query"
-  *ngIf="authenticateReportProgress.isInProgress$ | async"
 ></mat-progress-bar>
 
 <div class="login">
