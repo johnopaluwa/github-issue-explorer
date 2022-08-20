@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
-import { GetPublicRepoGQL } from 'src/generated/graphql';
+import { ExploreService } from '../services/explore.service';
 
 @Component({
   selector: 'app-public-repo',
@@ -8,17 +7,9 @@ import { GetPublicRepoGQL } from 'src/generated/graphql';
   styleUrls: ['./public-repo.component.scss'],
 })
 export class PublicRepoComponent implements OnInit {
-  constructor(private getPublicRepoGQL: GetPublicRepoGQL) {}
+  constructor(private readonly exploreService: ExploreService) {}
 
-  public publicRepos$ = this.getPublicRepoGQL
-    .watch()
-    .valueChanges.pipe(
-      map((s) =>
-        s.data.search.nodes
-          ?.map((node) => (node?.__typename === 'Repository' ? node : null))
-          .filter((repos) => !!repos)
-      )
-    );
+  public publicRepos$ = this.exploreService.getPublicRepoQuery();
 
   ngOnInit(): void {}
 }

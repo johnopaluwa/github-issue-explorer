@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ReportProgress } from 'src/app/root/helpers/report-progress';
+import { ReportProgressSingleton } from 'src/app/root/helpers/report-progress.singleton';
 import { saveToken } from '../ngrx/actions/token.actions';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     authToken: ['', [Validators.required]],
   });
 
-  public readonly authenticateReportProgress = new ReportProgress<string>();
+  public readonly reportProgress = ReportProgressSingleton.getInstance();
 
   constructor(private fb: FormBuilder, private store: Store) {}
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(
       saveToken({
         token: userToken?.trim(),
-        reportProgress: this.authenticateReportProgress,
+        reportProgress: this.reportProgress,
       })
     );
   }

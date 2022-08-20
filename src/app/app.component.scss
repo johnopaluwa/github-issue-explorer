@@ -1,0 +1,9 @@
+.progress {
+  position: fixed;
+  top: 0;
+  display: none;
+}
+
+.progress--visible {
+  display: block;
+}

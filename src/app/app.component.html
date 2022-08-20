@@ -1,1 +1,7 @@
+<mat-progress-bar
+  class="progress"
+  [class.progress--visible]="reportProgress.isInProgress$ | async"
+  mode="query"
+></mat-progress-bar>
+
 <router-outlet></router-outlet>
