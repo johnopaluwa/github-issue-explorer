@@ -8,7 +8,7 @@ export class AuthApiService {
 
   authenticate() {
     return this.authenticateUserGQL
-      .watch()
+      .watch({}, { fetchPolicy: 'no-cache' })
       .valueChanges.pipe(map((s) => s.data.viewer));
   }
 }
