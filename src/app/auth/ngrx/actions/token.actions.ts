@@ -16,9 +16,15 @@ export const authenticateToken = createAction(
   props<{ token: string; reportProgress: ReportProgressSingleton }>()
 );
 export const tokenAuthenticationSuccessful = createAction(
-  '[Token] token authentication successful'
+  '[Token] token authentication successful',
+  props<{ reportProgress: ReportProgressSingleton }>()
 );
 
 export const tokenAuthenticationFailed = createAction(
   '[Token] token authentication failed'
+);
+
+export const repoDataPreloaded = createAction('[Token] repo data preloaded');
+export const repoDataPreloadFailed = createAction(
+  '[Token] repo data preload failed'
 );

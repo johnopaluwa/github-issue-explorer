@@ -7,6 +7,8 @@ import { TopLevelUrls } from 'src/app/root/enums/global-url.enum';
 import { AuthApiService } from '../../services/auth-api.service';
 import {
   authenticateToken,
+  repoDataPreloaded,
+  repoDataPreloadFailed,
   saveToken,
   tokenAuthenticationFailed,
   tokenAuthenticationSuccessful,
@@ -46,8 +48,9 @@ export class TokenEffects {
         action.reportProgress.inProgress();
         return this.api.authenticate().pipe(
           map(() => {
-            action.reportProgress.done();
-            return tokenAuthenticationSuccessful();
+            return tokenAuthenticationSuccessful({
+              reportProgress: action.reportProgress,
+            });
           }),
           catchError((_error: Error) => {
             action.reportProgress.failed();
@@ -58,10 +61,29 @@ export class TokenEffects {
     )
   );
 
+  preloadRepoData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(tokenAuthenticationSuccessful),
+      mergeMap((action) => {
+        action.reportProgress.inProgress();
+        return this.api.preloadPublicRepo().pipe(
+          map(() => {
+            action.reportProgress.done();
+            return repoDataPreloaded();
+          }),
+          catchError((_error: Error) => {
+            action.reportProgress.failed();
+            return of(repoDataPreloadFailed());
+          })
+        );
+      })
+    )
+  );
+
   redirectAfterLogin$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(tokenAuthenticationSuccessful),
+        ofType(repoDataPreloaded),
         tap((_) => this.router.navigate([TopLevelUrls.explore]))
       ),
     { dispatch: false }
