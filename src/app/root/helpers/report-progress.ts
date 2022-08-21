@@ -2,7 +2,7 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Progress } from './progress';
 
-export class ReportProgress<T = undefined> {
+export class ReportProgress<T = string> {
   private readonly internalProgress$ = new BehaviorSubject<Progress>(
     Progress.None
   );

@@ -53,7 +53,9 @@ export class TokenEffects {
             });
           }),
           catchError((_error: Error) => {
-            action.reportProgress.failed();
+            const error =
+              'The token you provided is invalid. Please click <a  href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank" >here</a > and follow the instructions on how to generate a new Token';
+            action.reportProgress.failed(error);
             return of(tokenAuthenticationFailed());
           })
         );
