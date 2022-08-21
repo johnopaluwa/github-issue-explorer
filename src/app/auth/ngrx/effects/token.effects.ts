@@ -74,7 +74,9 @@ export class TokenEffects {
             return repoDataPreloaded();
           }),
           catchError((_error: Error) => {
-            action.reportProgress.failed();
+            action.reportProgress.failed(
+              'Error occured while loading public repo. Please try again.'
+            );
             return of(repoDataPreloadFailed());
           })
         );

@@ -1,9 +1,22 @@
 .public-repo {
   display: grid;
-  grid-row-gap: 10px;
-  justify-items: center;
+  grid-template-rows: auto 1fr;
+  height: 100%;
 }
 
-.public-repo__card {
+.public-repo__content {
+  display: grid;
+  grid-row-gap: 10px;
+  justify-items: center;
+  overflow-y: auto;
+}
+
+.content__card {
   width: 80%;
+}
+
+.public-repo__header {
+  width: 80%;
+  margin: auto;
+  padding: 20px 0;
 }

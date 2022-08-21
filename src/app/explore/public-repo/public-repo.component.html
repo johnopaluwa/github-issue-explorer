@@ -1,12 +1,22 @@
-<div class="public-repo" *ngIf="publicRepos$ | async as publicRepos">
-  <mat-card class="public-repo__card" *ngFor="let publicRepo of publicRepos">
-    <mat-card-title> {{ publicRepo?.nameWithOwner }}</mat-card-title>
-    <mat-card-subtitle>
-      <p>{{ publicRepo?.description }}</p>
-      <p>
-        <i class="fa fa-star"></i>
-        <span> {{ publicRepo?.stargazerCount }}</span>
-      </p></mat-card-subtitle
-    >
-  </mat-card>
+<div class="public-repo">
+  <div class="public-repo__header">
+    <app-header-authenticated
+      (changeToken)="changeToken()"
+    ></app-header-authenticated>
+  </div>
+
+  <div class="public-repo__content" *ngIf="publicRepos$ | async as publicRepos">
+    <mat-card class="content__card" *ngFor="let publicRepo of publicRepos">
+      <mat-card-title> {{ publicRepo?.nameWithOwner }}</mat-card-title>
+      <mat-card-subtitle>
+        <p>{{ publicRepo?.description }}</p>
+        <p>
+          <i class="fa fa-star"></i>
+          <span> {{ publicRepo?.stargazerCount }}</span>
+        </p></mat-card-subtitle
+      >
+    </mat-card>
+
+    <mat-paginator [length]="200" [pageSize]="50"> </mat-paginator>
+  </div>
 </div>
