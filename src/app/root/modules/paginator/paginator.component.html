@@ -1,0 +1,25 @@
+<div class="paginator">
+  <p>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!(isBackEnabled$ | async)"
+      (click)="back.emit()"
+    >
+      Back
+    </button>
+  </p>
+
+  <p>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!(isForwardEnabled$ | async)"
+      (click)="forward.emit()"
+    >
+      Forward
+    </button>
+  </p>
+</div>

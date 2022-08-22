@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HeaderAuthenticatedModule } from '../root/modules/header-authenticated/header-authenticated.module';
 import { NgMaterialModule } from '../root/modules/ng-material/ng-material.module';
+import { PaginatorModule } from '../root/modules/paginator/paginator.module';
 import { ExploreRoutingModule } from './explore-routing.module';
 import { ExploreComponent } from './explore.component';
 import { PublicRepoComponent } from './public-repo/public-repo.component';
@@ -13,6 +14,7 @@ import { PublicRepoComponent } from './public-repo/public-repo.component';
     ExploreRoutingModule,
     NgMaterialModule,
     HeaderAuthenticatedModule,
+    PaginatorModule,
   ],
 })
 export class ExploreModule {}

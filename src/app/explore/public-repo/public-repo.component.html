@@ -17,6 +17,12 @@
       >
     </mat-card>
 
-    <mat-paginator [length]="200" [pageSize]="50"> </mat-paginator>
+    <app-paginator
+      *ngIf="pageInfo$ | async as pageInfo"
+      [isBackEnabled]="pageInfo.hasPreviousPage"
+      [isForwardEnabled]="pageInfo.hasNextPage"
+      (back)="gotoPreviousPage(pageInfo.startCursor)"
+      (forward)="gotoNextPage(pageInfo.endCursor)"
+    ></app-paginator>
   </div>
 </div>

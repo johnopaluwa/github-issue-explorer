@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthenticateUserGQL, GetPublicRepoGQL } from 'src/generated/graphql';
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +17,8 @@ export class AuthApiService {
   }
 
   preloadPublicRepo() {
-    return this.getPublicRepoGQL.watch().valueChanges.pipe(map((s) => s.data));
+    return this.getPublicRepoGQL
+      .watch({ pageCount: environment.publicRepoPageCount })
+      .valueChanges.pipe(map((s) => s.data));
   }
 }

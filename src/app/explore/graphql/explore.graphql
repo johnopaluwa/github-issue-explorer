@@ -1,5 +1,17 @@
-query GetPublicRepo {
-  search(query: "is:public", type: REPOSITORY, first: 50) {
+query GetPublicRepo($after: String, $before: String, $pageCount: Int!) {
+  search(
+    query: "is:public"
+    type: REPOSITORY
+    first: $pageCount
+    after: $after
+    before: $before
+  ) {
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+      hasPreviousPage
+    }
     nodes {
       ... on Repository {
         nameWithOwner

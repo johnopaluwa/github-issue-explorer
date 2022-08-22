@@ -26408,10 +26408,14 @@ export type AuthenticateUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AuthenticateUserQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string } };
 
-export type GetPublicRepoQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPublicRepoQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  pageCount: Scalars['Int'];
+}>;
 
 
-export type GetPublicRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
+export type GetPublicRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
 
 export const AuthenticateUserDocument = gql`
     query authenticateUser {
@@ -26432,8 +26436,20 @@ export const AuthenticateUserDocument = gql`
     }
   }
 export const GetPublicRepoDocument = gql`
-    query GetPublicRepo {
-  search(query: "is:public", type: REPOSITORY, first: 50) {
+    query GetPublicRepo($after: String, $before: String, $pageCount: Int!) {
+  search(
+    query: "is:public"
+    type: REPOSITORY
+    first: $pageCount
+    after: $after
+    before: $before
+  ) {
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+      hasPreviousPage
+    }
     nodes {
       ... on Repository {
         nameWithOwner
