@@ -1,1 +1,31 @@
-<p>detail works!</p>
+<div class="details">
+  <div class="details__header">
+    <app-header-authenticated
+      (changeToken)="changeToken()"
+    ></app-header-authenticated>
+  </div>
+
+  <div class="details__content" *ngIf="issues$ | async as issues">
+    <mat-card class="content__card" *ngFor="let issue of issues">
+      <a [href]="issue?.url" target="_blank">
+        <mat-card-title class="card__title"> {{ issue?.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <p class="card__content">
+            <span>#{{ issue?.number }}</span>
+            <span>{{ issue?.state }}</span>
+            <span>created on {{ issue?.createdAt | date }}</span>
+            <span>by {{ issue?.author?.login }}</span>
+          </p>
+        </mat-card-subtitle>
+      </a>
+    </mat-card>
+
+    <app-paginator
+      *ngIf="pageInfo$ | async as pageInfo"
+      [isBackEnabled]="pageInfo.hasPreviousPage"
+      [isForwardEnabled]="pageInfo.hasNextPage"
+      (back)="gotoPreviousPage(pageInfo.startCursor)"
+      (forward)="gotoNextPage(pageInfo.endCursor)"
+    ></app-paginator>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.details {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+}
+
+.details__content {
+  display: grid;
+  grid-row-gap: 10px;
+  justify-items: center;
+  overflow-y: auto;
+}
+
+.content__card {
+  width: 80%;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.card__title {
+  font-size: 20px;
+}
+
+.card__content {
+  display: flex;
+  column-gap: 10px;
+}
+
+.details__header {
+  width: 80%;
+  margin: auto;
+  padding: 20px 0;
+}

@@ -23,6 +23,7 @@ export class AuthApiService {
   preloadPublicRepo() {
     return this.searchWithTypeGQL
       .watch({
+        query: 'is:public',
         type: SearchType.Repository,
         first: environment.publicRepoPageCount,
       })

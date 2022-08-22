@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, map, of, switchMap } from 'rxjs';
-import { TopLevelUrls } from 'src/app/root/enums/global-url.enum';
+import { combineLatest, map, of, switchMap } from 'rxjs';
+import { Pagination } from 'src/app/root/extends/pagination';
 import { ReportProgressSingleton } from 'src/app/root/helpers/report-progress.singleton';
 import { ExploreService } from '../services/explore.service';
 
@@ -10,16 +10,13 @@ import { ExploreService } from '../services/explore.service';
   templateUrl: './public-repo.component.html',
   styleUrls: ['./public-repo.component.scss'],
 })
-export class PublicRepoComponent implements OnInit {
+export class PublicRepoComponent extends Pagination implements OnInit {
   constructor(
     private readonly exploreService: ExploreService,
-    private readonly router: Router
-  ) {}
-
-  public readonly selectedCursor$ = new BehaviorSubject<{
-    startCursor: string | null | undefined;
-    endCursor: string | null | undefined;
-  }>({ endCursor: undefined, startCursor: undefined });
+    readonly router: Router
+  ) {
+    super(router);
+  }
 
   public initialLoad$ = this.exploreService.getPublicRepoQuerySearch(
     ReportProgressSingleton.getInstance()
@@ -65,15 +62,7 @@ export class PublicRepoComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  changeToken() {
-    this.router.navigate([TopLevelUrls.login]);
-  }
-
-  gotoNextPage(pointer: string | null | undefined) {
-    this.selectedCursor$.next({ endCursor: pointer, startCursor: undefined });
-  }
-
-  gotoPreviousPage(pointer: string | null | undefined) {
-    this.selectedCursor$.next({ startCursor: pointer, endCursor: undefined });
+  gotoRepoDetails(nameWithOwner: string | undefined) {
+    this.router.navigate([nameWithOwner]);
   }
 }

@@ -26409,6 +26409,7 @@ export type AuthenticateUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type AuthenticateUserQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string } };
 
 export type SearchWithTypeQueryVariables = Exact<{
+  query: Scalars['String'];
   type: SearchType;
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -26417,7 +26418,7 @@ export type SearchWithTypeQueryVariables = Exact<{
 }>;
 
 
-export type SearchWithTypeQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
+export type SearchWithTypeQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', title: string, url: any, createdAt: any, number: number, state: IssueState, author?: { __typename?: 'Bot', login: string } | { __typename?: 'EnterpriseUserAccount', login: string } | { __typename?: 'Mannequin', login: string } | { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } | null } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
 
 export const AuthenticateUserDocument = gql`
     query authenticateUser {
@@ -26438,9 +26439,9 @@ export const AuthenticateUserDocument = gql`
     }
   }
 export const SearchWithTypeDocument = gql`
-    query SearchWithType($type: SearchType!, $after: String, $before: String, $first: Int, $last: Int) {
+    query SearchWithType($query: String!, $type: SearchType!, $after: String, $before: String, $first: Int, $last: Int) {
   search(
-    query: "is:public"
+    query: $query
     type: $type
     first: $first
     last: $last
@@ -26458,6 +26459,16 @@ export const SearchWithTypeDocument = gql`
         nameWithOwner
         stargazerCount
         description
+      }
+      ... on Issue {
+        title
+        url
+        createdAt
+        number
+        state
+        author {
+          login
+        }
       }
     }
   }

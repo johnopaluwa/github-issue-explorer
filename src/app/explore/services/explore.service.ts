@@ -19,6 +19,7 @@ export class ExploreService {
     return this.searchWithTypeGQL
       .watch({
         type: SearchType.Repository,
+        query: 'is:public',
         first:
           (!after && !before) || !!after
             ? environment.publicRepoPageCount

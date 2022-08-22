@@ -1,4 +1,5 @@
 query SearchWithType(
+  $query: String!
   $type: SearchType!
   $after: String
   $before: String
@@ -6,7 +7,7 @@ query SearchWithType(
   $last: Int
 ) {
   search(
-    query: "is:public"
+    query: $query
     type: $type
     first: $first
     last: $last
@@ -24,6 +25,17 @@ query SearchWithType(
         nameWithOwner
         stargazerCount
         description
+      }
+
+      ... on Issue {
+        title
+        url
+        createdAt
+        number
+        state
+        author {
+          login
+        }
       }
     }
   }
