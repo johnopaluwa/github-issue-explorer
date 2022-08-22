@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { catchError, map, of } from 'rxjs';
 import { ReportProgressSingleton } from 'src/app/root/helpers/report-progress.singleton';
 import { environment } from 'src/environments/environment';
-import { GetPublicRepoGQL } from 'src/generated/graphql';
+import { SearchType, SearchWithTypeGQL } from 'src/generated/graphql';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExploreService {
-  constructor(private getPublicRepoGQL: GetPublicRepoGQL) {}
+  constructor(private searchWithTypeGQL: SearchWithTypeGQL) {}
 
   getPublicRepoQuerySearch(
     progress: ReportProgressSingleton,
@@ -16,8 +16,9 @@ export class ExploreService {
     after?: string | null | undefined
   ) {
     progress.inProgress();
-    return this.getPublicRepoGQL
+    return this.searchWithTypeGQL
       .watch({
+        type: SearchType.Repository,
         first:
           (!after && !before) || !!after
             ? environment.publicRepoPageCount

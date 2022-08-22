@@ -1,7 +1,13 @@
-query GetPublicRepo($after: String, $before: String, $first: Int, $last: Int) {
+query SearchWithType(
+  $type: SearchType!
+  $after: String
+  $before: String
+  $first: Int
+  $last: Int
+) {
   search(
     query: "is:public"
-    type: REPOSITORY
+    type: $type
     first: $first
     last: $last
     after: $after

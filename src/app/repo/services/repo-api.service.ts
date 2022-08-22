@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GetPublicRepoGQL } from 'src/generated/graphql';
+import { SearchType, SearchWithTypeGQL } from 'src/generated/graphql';
 
 @Injectable({ providedIn: 'root' })
 export class RepoApiService {
-  constructor(private getPublicRepoGQL: GetPublicRepoGQL) {}
+  constructor(private searchWithTypeGQL: SearchWithTypeGQL) {}
   getPublicRepos() {
-    this.getPublicRepoGQL
-      .watch()
-      .valueChanges.subscribe((s) => console.warn(s.data.search.edges));
+    this.searchWithTypeGQL
+      .watch({ type: SearchType.Repository })
+      .valueChanges.subscribe((s) => console.warn(s.data.search));
   }
 }

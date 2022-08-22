@@ -26408,7 +26408,8 @@ export type AuthenticateUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AuthenticateUserQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string } };
 
-export type GetPublicRepoQueryVariables = Exact<{
+export type SearchWithTypeQueryVariables = Exact<{
+  type: SearchType;
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -26416,7 +26417,7 @@ export type GetPublicRepoQueryVariables = Exact<{
 }>;
 
 
-export type GetPublicRepoQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
+export type SearchWithTypeQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue' } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
 
 export const AuthenticateUserDocument = gql`
     query authenticateUser {
@@ -26436,11 +26437,11 @@ export const AuthenticateUserDocument = gql`
       super(apollo);
     }
   }
-export const GetPublicRepoDocument = gql`
-    query GetPublicRepo($after: String, $before: String, $first: Int, $last: Int) {
+export const SearchWithTypeDocument = gql`
+    query SearchWithType($type: SearchType!, $after: String, $before: String, $first: Int, $last: Int) {
   search(
     query: "is:public"
-    type: REPOSITORY
+    type: $type
     first: $first
     last: $last
     after: $after
@@ -26466,8 +26467,8 @@ export const GetPublicRepoDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class GetPublicRepoGQL extends Apollo.Query<GetPublicRepoQuery, GetPublicRepoQueryVariables> {
-    document = GetPublicRepoDocument;
+  export class SearchWithTypeGQL extends Apollo.Query<SearchWithTypeQuery, SearchWithTypeQueryVariables> {
+    document = SearchWithTypeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
