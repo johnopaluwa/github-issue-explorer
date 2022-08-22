@@ -6,6 +6,18 @@
   </div>
 
   <div class="details__content" *ngIf="issues$ | async as issues">
+    <p
+      class="content__repo-details"
+      *ngIf="repoDetails$ | async as repoDetails"
+    >
+      <span class="repo-details__name-owner">
+        <b> {{ repoDetails.nameWithOwner }}</b></span
+      >
+      <br />
+      <span><b> Description:</b> {{ repoDetails.description }}</span> <br />
+      <span><b> Created on:</b> {{ repoDetails.createdAt | date }}</span>
+    </p>
+    <p class="content__isssues-title">Issues</p>
     <mat-card class="content__card" *ngFor="let issue of issues">
       <a [href]="issue?.url" target="_blank">
         <mat-card-title class="card__title"> {{ issue?.title }}</mat-card-title>

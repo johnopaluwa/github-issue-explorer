@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, map, of, switchMap } from 'rxjs';
 import { Pagination } from 'src/app/root/extends/pagination';
 import { ReportProgressSingleton } from 'src/app/root/helpers/report-progress.singleton';
-import { SearchWithTypeQuery } from 'src/generated/graphql';
+import { RepoDetailResolverData } from 'src/app/root/resolvers/repo-detail-resolver-data';
 import { RepoApiService } from '../services/repo-api.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { RepoApiService } from '../services/repo-api.service';
 })
 export class DetailComponent extends Pagination implements OnInit {
   private initialLoad$ = this.activatedRoute.data.pipe(
-    map((data) => data['repoDetail'] as SearchWithTypeQuery)
+    map((data) => data['repoDetail'] as RepoDetailResolverData)
   );
 
   private readonly search$ = combineLatest([
@@ -23,7 +23,7 @@ export class DetailComponent extends Pagination implements OnInit {
   ]).pipe(
     switchMap(([initialLoad, selected, paramMap]) => {
       if (!selected.endCursor && !selected.startCursor) {
-        return of(initialLoad.search);
+        return of(initialLoad.searchWithTypeQuery.search);
       }
 
       return this.repoApiService.getIssues(
@@ -45,6 +45,10 @@ export class DetailComponent extends Pagination implements OnInit {
         ?.map((node) => (node?.__typename === 'Issue' ? node : null))
         .filter((issues) => !!issues);
     })
+  );
+
+  public repoDetails$ = this.initialLoad$.pipe(
+    map((initialLoad) => initialLoad.getRepositoryDetailsQuery.repository)
   );
 
   public pageInfo$ = this.search$.pipe(

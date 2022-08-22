@@ -6,6 +6,6 @@ export type Environment = {
 
 export const ENVIRONMENT_DEFAULTS: Environment = {
   production: false,
-  publicRepoPageCount: 50,
-  issuePageCount: 50,
+  publicRepoPageCount: 20,
+  issuePageCount: 20,
 };

@@ -11,7 +11,9 @@
       *ngFor="let publicRepo of publicRepos"
       (click)="gotoRepoDetails(publicRepo?.nameWithOwner)"
     >
-      <mat-card-title> {{ publicRepo?.nameWithOwner }}</mat-card-title>
+      <mat-card-title class="card__title">
+        {{ publicRepo?.nameWithOwner }}</mat-card-title
+      >
       <mat-card-subtitle>
         <p>{{ publicRepo?.description }}</p>
         <p>

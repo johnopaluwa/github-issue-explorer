@@ -26420,6 +26420,14 @@ export type SearchWithTypeQueryVariables = Exact<{
 
 export type SearchWithTypeQuery = { __typename?: 'Query', search: { __typename?: 'SearchResultItemConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, startCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean }, nodes?: Array<{ __typename?: 'App' } | { __typename?: 'Discussion' } | { __typename?: 'Issue', title: string, url: any, createdAt: any, number: number, state: IssueState, author?: { __typename?: 'Bot', login: string } | { __typename?: 'EnterpriseUserAccount', login: string } | { __typename?: 'Mannequin', login: string } | { __typename?: 'Organization', login: string } | { __typename?: 'User', login: string } | null } | { __typename?: 'MarketplaceListing' } | { __typename?: 'Organization' } | { __typename?: 'PullRequest' } | { __typename?: 'Repository', nameWithOwner: string, stargazerCount: number, description?: string | null } | { __typename?: 'User' } | null> | null } };
 
+export type GetRepositoryDetailsQueryVariables = Exact<{
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type GetRepositoryDetailsQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', createdAt: any, description?: string | null, nameWithOwner: string } | null };
+
 export const AuthenticateUserDocument = gql`
     query authenticateUser {
   viewer {
@@ -26480,6 +26488,26 @@ export const SearchWithTypeDocument = gql`
   })
   export class SearchWithTypeGQL extends Apollo.Query<SearchWithTypeQuery, SearchWithTypeQueryVariables> {
     document = SearchWithTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetRepositoryDetailsDocument = gql`
+    query GetRepositoryDetails($owner: String!, $name: String!) {
+  repository(owner: $owner, name: $name) {
+    createdAt
+    description
+    nameWithOwner
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetRepositoryDetailsGQL extends Apollo.Query<GetRepositoryDetailsQuery, GetRepositoryDetailsQueryVariables> {
+    document = GetRepositoryDetailsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
