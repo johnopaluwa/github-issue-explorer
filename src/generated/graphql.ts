@@ -26411,7 +26411,8 @@ export type AuthenticateUserQuery = { __typename?: 'Query', viewer: { __typename
 export type GetPublicRepoQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
-  pageCount: Scalars['Int'];
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -26436,11 +26437,12 @@ export const AuthenticateUserDocument = gql`
     }
   }
 export const GetPublicRepoDocument = gql`
-    query GetPublicRepo($after: String, $before: String, $pageCount: Int!) {
+    query GetPublicRepo($after: String, $before: String, $first: Int, $last: Int) {
   search(
     query: "is:public"
     type: REPOSITORY
-    first: $pageCount
+    first: $first
+    last: $last
     after: $after
     before: $before
   ) {

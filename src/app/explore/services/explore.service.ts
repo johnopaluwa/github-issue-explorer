@@ -12,13 +12,17 @@ export class ExploreService {
 
   getPublicRepoQuerySearch(
     progress: ReportProgressSingleton,
-    before?: string,
-    after?: string
+    before?: string | null | undefined,
+    after?: string | null | undefined
   ) {
     progress.inProgress();
     return this.getPublicRepoGQL
       .watch({
-        pageCount: environment.publicRepoPageCount,
+        first:
+          (!after && !before) || !!after
+            ? environment.publicRepoPageCount
+            : undefined,
+        last: !!before ? environment.publicRepoPageCount : undefined,
         before: before,
         after: after,
       })

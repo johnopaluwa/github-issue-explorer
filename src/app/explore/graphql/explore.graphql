@@ -1,8 +1,9 @@
-query GetPublicRepo($after: String, $before: String, $pageCount: Int!) {
+query GetPublicRepo($after: String, $before: String, $first: Int, $last: Int) {
   search(
     query: "is:public"
     type: REPOSITORY
-    first: $pageCount
+    first: $first
+    last: $last
     after: $after
     before: $before
   ) {

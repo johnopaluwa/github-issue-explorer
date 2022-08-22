@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, of, switchMap } from 'rxjs';
 import { TopLevelUrls } from 'src/app/root/enums/global-url.enum';
 import { ReportProgressSingleton } from 'src/app/root/helpers/report-progress.singleton';
 import { ExploreService } from '../services/explore.service';
@@ -16,8 +16,30 @@ export class PublicRepoComponent implements OnInit {
     private readonly router: Router
   ) {}
 
-  public publicRepoSearch$ = this.exploreService.getPublicRepoQuerySearch(
+  public readonly selectedCursor$ = new BehaviorSubject<{
+    startCursor: string | null | undefined;
+    endCursor: string | null | undefined;
+  }>({ endCursor: undefined, startCursor: undefined });
+
+  public initialLoad$ = this.exploreService.getPublicRepoQuerySearch(
     ReportProgressSingleton.getInstance()
+  );
+
+  public publicRepoSearch$ = combineLatest([
+    this.initialLoad$,
+    this.selectedCursor$,
+  ]).pipe(
+    switchMap(([initialLoad, selected]) => {
+      if (!selected.endCursor && !selected.startCursor) {
+        return of(initialLoad);
+      }
+
+      return this.exploreService.getPublicRepoQuerySearch(
+        ReportProgressSingleton.getInstance(),
+        selected.startCursor,
+        selected.endCursor
+      );
+    })
   );
 
   public publicRepos$ = this.publicRepoSearch$.pipe(
@@ -47,7 +69,11 @@ export class PublicRepoComponent implements OnInit {
     this.router.navigate([TopLevelUrls.login]);
   }
 
-  gotoNextPage(pointer: string | null | undefined) {}
+  gotoNextPage(pointer: string | null | undefined) {
+    this.selectedCursor$.next({ endCursor: pointer, startCursor: undefined });
+  }
 
-  gotoPreviousPage(pointer: string | null | undefined) {}
+  gotoPreviousPage(pointer: string | null | undefined) {
+    this.selectedCursor$.next({ startCursor: pointer, endCursor: undefined });
+  }
 }

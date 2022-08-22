@@ -18,7 +18,7 @@ export class AuthApiService {
 
   preloadPublicRepo() {
     return this.getPublicRepoGQL
-      .watch({ pageCount: environment.publicRepoPageCount })
+      .watch({ first: environment.publicRepoPageCount })
       .valueChanges.pipe(map((s) => s.data));
   }
 }
