@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { combineLatest, filter, startWith, Subject, takeUntil } from 'rxjs';
 import { ReportProgressSingleton } from '../../helpers/report-progress.singleton';
 import { CustomSnackBarComponent } from './custom-snack-bar/custom-snack-bar.component';
+import { CustomSnackBarData } from './models/custom-snack-bar-data';
 
 @Directive()
 export abstract class CustomSnackBarReport implements OnDestroy {
@@ -23,10 +24,15 @@ export abstract class CustomSnackBarReport implements OnDestroy {
 
   openSnackBar(failedMessage: string | null, snackBar: MatSnackBar) {
     snackBar.openFromComponent(CustomSnackBarComponent, {
-      data: failedMessage,
+      data: {
+        title: 'Failed',
+        content: failedMessage,
+        type: 'failed',
+      } as CustomSnackBarData,
       horizontalPosition: 'start',
       verticalPosition: 'bottom',
-      duration: 5000,
+      panelClass: ['snack-background-color'],
+      duration: 10000,
     });
   }
 

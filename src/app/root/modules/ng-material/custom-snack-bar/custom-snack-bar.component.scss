@@ -1,5 +1,3 @@
-.custom-snack-bar {
-  a {
-    color: red;
-  }
+::ng-deep snack-bar-container.snack-background-color {
+  background-color: brown;
 }
