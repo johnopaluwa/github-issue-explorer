@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { ReportProgressSingleton } from './root/helpers/report-progress.singleton';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackBarReport } from './root/modules/ng-material/custom-snack-bar-report';
 
 @Component({
@@ -14,10 +9,6 @@ import { CustomSnackBarReport } from './root/modules/ng-material/custom-snack-ba
 })
 export class AppComponent extends CustomSnackBarReport implements OnInit {
   title = 'github-issue-explorer';
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
-  public readonly reportProgress = ReportProgressSingleton.getInstance();
 
   constructor(snackBar: MatSnackBar) {
     super(snackBar);
