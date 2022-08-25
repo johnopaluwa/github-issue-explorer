@@ -8,8 +8,6 @@ import { CustomSnackBarReport } from './root/modules/ng-material/custom-snack-ba
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent extends CustomSnackBarReport implements OnInit {
-  title = 'github-issue-explorer';
-
   constructor(snackBar: MatSnackBar) {
     super(snackBar);
   }

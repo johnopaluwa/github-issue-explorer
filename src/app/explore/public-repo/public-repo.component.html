@@ -2,6 +2,7 @@
   <div class="public-repo__header">
     <app-header-authenticated
       (changeToken)="changeToken()"
+      data-test="data-change-token"
     ></app-header-authenticated>
   </div>
 
@@ -10,6 +11,7 @@
       class="content__card"
       *ngFor="let publicRepo of publicRepos"
       (click)="gotoRepoDetails(publicRepo?.nameWithOwner)"
+      [attr.data-test]="'data-' + publicRepo?.nameWithOwner"
     >
       <mat-card-title class="card__title">
         {{ publicRepo?.nameWithOwner }}</mat-card-title
@@ -29,6 +31,7 @@
       [isForwardEnabled]="pageInfo.hasNextPage"
       (back)="gotoPreviousPage(pageInfo.startCursor)"
       (forward)="gotoNextPage(pageInfo.endCursor)"
+      data-test="data-paginator"
     ></app-paginator>
   </div>
 </div>

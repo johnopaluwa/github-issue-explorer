@@ -2,6 +2,7 @@
   class="progress"
   [class.progress--visible]="reportProgress.isInProgress$ | async"
   mode="query"
+  data-test="progress-bar"
 ></mat-progress-bar>
 
 <router-outlet></router-outlet>
