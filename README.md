@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Vscode extensions
 
 GraphQL: Language Feature Support.
+
+## Token
+
+Follow the instructions in this url on generating a token: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token.
